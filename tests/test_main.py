@@ -16,7 +16,6 @@ class SimpleDatabaseTestCase(unittest.TestCase):
         # initial clean up
         if os.path.exists(BASE_DB_FILE_PATH):
             shutil.rmtree(BASE_DB_FILE_PATH)
-
         self.db = create_database('library')
         self.db.create_table('authors', columns=[
             {'name': 'id', 'type': 'int'},
@@ -27,6 +26,93 @@ class SimpleDatabaseTestCase(unittest.TestCase):
         ])
         self.db.authors.insert(1, 'Jorge Luis Borges', date(1899, 8, 24), 'ARG', False)
         self.db.authors.insert(2, 'Edgard Alan Poe', date(1809, 1, 19), 'USA', False)
+        
+        
+    """
+    # IVAN
+    self.db = {
+        'authors': {
+            'columns' = [
+                {'name': 'id', 'type': 'int'}, #can you write example of data
+                {'mycolname': value, 'type': 'int} #?
+            ],
+            
+        },
+        'books': {
+            
+        }
+    }
+    
+    self.db = {
+        'authors': {
+            'columns' : [
+                {'col_name': 'id', 'type': 'int'},
+                {'col_name': 'name', 'type': 'str'}
+            ],
+            'data': [
+                {
+                    'id': 'STRING',
+                    'name': 'Jorge Luis Borges',
+                    'birth_date': '',
+                    'nationality': 'ARG',
+                    'alive': False
+                },
+                {
+                    'id': 'jesssica was here',
+                    'name': 'Jorge Luis Borges',
+                    'birth_date': '',
+                    'nationality': 'ARG',
+                    'alive': False
+                }
+            ]
+            
+        }
+    }    
+    
+
+    
+    
+    # DAVE
+    self.db = {
+        'authors': {
+            'columns' = [
+                {'name': 'id', 'type': 'int'},
+                
+            ],
+            data = [
+            [ 1, 'Jorge Luis Borges', date(1899, 8, 24), 'ARG', False] ,
+            ]
+                
+            }
+            
+        },
+        'books': {
+            
+        }
+    }    
+    you guys think a lot differently from me LOL i move fast :)
+    
+    # JESSICA
+    self.db = {    #this is database
+        self.authors : { #this is table
+            'names' : { #this is cols
+                'type' : type
+                'data' : [value1, value 2 ]
+            }
+            
+            'birth_date' : {
+                'type' : type2
+                'values' : [value1, value 2 ]
+            }
+            'id' : {
+                'type' : type3
+                'values' : [value1, value 2 ]
+            }
+        }
+    }
+    """
+        
+        
 
     def tearDown(self):
         if os.path.exists(BASE_DB_FILE_PATH):
@@ -51,9 +137,8 @@ class SimpleDatabaseTestCase(unittest.TestCase):
 
     def test_create_database_duplicated_name(self):
         with self.assertRaisesRegexp(ValidationError,
-                                     'Database with name "library" already exists.'):
-            create_database('library')
-
+                                     "Database with name 'library' already exists."):
+            create_database('library') 
     def test_connect_existing_database(self):
         db = create_database('test-db')
         db.create_table('authors', columns=[
